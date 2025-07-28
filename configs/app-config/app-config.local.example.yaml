@@ -35,7 +35,7 @@ catalog:
     providers:
       keycloakOrg:
         default:
-          baseUrl: http://interesting_wu:8080/
+          baseUrl: ${KEYCLOAK_BASE_URL}
           loginRealm: demo-rhdh-events
           realm: demo-rhdh-events
           clientId: rhdh-events-webhook
