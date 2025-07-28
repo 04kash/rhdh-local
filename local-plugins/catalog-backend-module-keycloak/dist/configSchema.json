@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "catalog": {
+      "type": "object",
+      "properties": {
+        "providers": {
+          "type": "object",
+          "properties": {
+            "keycloakOrg": {
+              "type": "object",
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "baseUrl",
+                      "password",
+                      "username"
+                    ],
+                    "properties": {
+                      "baseUrl": {
+                        "description": "Location of the Keycloak instance",
+                        "type": "string"
+                      },
+                      "realm": {
+                        "description": "Keycloak realm name. This realm is scraped and entities are",
+                        "type": "string"
+                      },
+                      "loginRealm": {
+                        "description": "Keycloak realm name. This realm is used for authentication using the credentials below.",
+                        "type": "string"
+                      },
+                      "userQuerySize": {
+                        "description": "The number of users to query at a time.",
+                        "type": "number"
+                      },
+                      "groupQuerySize": {
+                        "description": "The number of groups to query at a time.",
+                        "type": "number"
+                      },
+                      "maxConcurrency": {
+                        "description": "Maximum request concurrency to prevent DoS attacks on the Keycloak server.",
+                        "type": "number"
+                      },
+                      "briefRepresentation": {
+                        "description": "Whether the API call will return a brief representation for groups and users or not. Defaults to true",
+                        "type": "boolean"
+                      },
+                      "schedule": {},
+                      "username": {
+                        "description": "Keycloak credentials. Use together with \"password\".",
+                        "type": "string"
+                      },
+                      "password": {
+                        "description": "Keycloak credentials. Use together with \"username\".",
+                        "visibility": "secret",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "baseUrl",
+                      "clientId",
+                      "clientSecret"
+                    ],
+                    "properties": {
+                      "baseUrl": {
+                        "description": "Location of the Keycloak instance",
+                        "type": "string"
+                      },
+                      "realm": {
+                        "description": "Keycloak realm name. This realm is scraped and entities are",
+                        "type": "string"
+                      },
+                      "loginRealm": {
+                        "description": "Keycloak realm name. This realm is used for authentication using the credentials below.",
+                        "type": "string"
+                      },
+                      "userQuerySize": {
+                        "description": "The number of users to query at a time.",
+                        "type": "number"
+                      },
+                      "groupQuerySize": {
+                        "description": "The number of groups to query at a time.",
+                        "type": "number"
+                      },
+                      "maxConcurrency": {
+                        "description": "Maximum request concurrency to prevent DoS attacks on the Keycloak server.",
+                        "type": "number"
+                      },
+                      "briefRepresentation": {
+                        "description": "Whether the API call will return a brief representation for groups and users or not. Defaults to true",
+                        "type": "boolean"
+                      },
+                      "schedule": {},
+                      "clientId": {
+                        "description": "Keycloak credentials. Use together with \"clientSecret\".",
+                        "type": "string"
+                      },
+                      "clientSecret": {
+                        "description": "Keycloak credentials. Use together with \"clientId\".",
+                        "visibility": "secret",
+                        "type": "string"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "useEventBus": {
+          "description": "Whether to use the event bus API in the events plugin backend to\ndistribute events across multiple instances when publishing and\nsubscribing to events.\n\nThe default is 'auto', which means means that the event bus API will be\nused if it's available, but will be disabled if the events backend\nreturns a 404.\n\nIf set to 'never', the events service will only ever publish events\nlocally to the same instance, while if set to 'always', the event bus API\nwill never be disabled, even if the events backend returns a 404.",
+          "enum": [
+            "always",
+            "auto",
+            "never"
+          ],
+          "type": "string"
+        }
+      }
+    }
+  }
+}

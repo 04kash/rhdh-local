@@ -1,11 +1,11 @@
 # Copy this file to app-config.local.yaml to override default app settings.
 # Example with GitHub integration referencing external secrets file.
 
-integrations:
-  github:
-    - host: github.com
-      apps:
-        - $include: ../extra-files/github-app-credentials.yaml
+# integrations:
+#   github:
+#     - host: github.com
+#       apps:
+#         - $include: ../extra-files/github-app-credentials.yaml
 
 app:
   title: Red Hat Developer Hub
@@ -28,4 +28,27 @@ app:
         headerColor1: ${HEADER_DARK_COLOR_1}
         headerColor2: ${HEADER_DARK_COLOR_2}
         navigationIndicatorColor: ${NAV_INDICATOR_DARK_COLOR}
+
+enabled:
+  keycloak: true
+catalog:
+    providers:
+      keycloakOrg:
+        default:
+          baseUrl: http://interesting_wu:8080/
+          loginRealm: demo-rhdh-events
+          realm: demo-rhdh-events
+          clientId: rhdh-events-webhook
+          clientSecret: ${CLIENT_SECRET}
+          schedule:
+            frequency:
+              hours: 1
+            timeout:
+              minutes: 30
+            initialDelay:
+              seconds: 7
+events:
+      http:
+        topics:
+          - keycloak
 

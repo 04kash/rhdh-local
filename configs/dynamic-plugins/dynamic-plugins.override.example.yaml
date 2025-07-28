@@ -6,8 +6,5 @@ includes:
 
 # Below you can add custom dynamic plugins, including local ones.
 plugins:
-  - package: ./local-plugins/example-plugin
+  - package: ./local-plugins/catalog-backend-module-keycloak
     disabled: false
-    pluginConfig:
-      # Optional: Configuration passed to your plugin
-      message: "Hello from local plugin"
